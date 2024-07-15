@@ -12,6 +12,8 @@ a script which can be inputted via a USB keyboard emulator.
 The reverse shell example provided here requires that your console is connected to a network. When connecting your console to a network be very careful to avoid connecting to the internet and updating. Try to block connectivity to Xbox LIVE as 
 much as possible, at the very least by setting your DNS to invalid servers.
 
+This exploit is not fully reliable. It relies on a CPU side channel as well as a race condition, both of which have the potential to fail. In the event of a failure, the exploit may alert you that it has failed via network output, or the console itself may crash and reboot.
+
 ## Usage
 - Modify line 7 of `gamescript_autosave.txt` to contain the local IP of your PC.
 - Copy `gamescript_autosave.txt`, `stage2.bin`, and `run.exe` to the `LocalState` directory of the Game Script application on your Console (`Q:\Users\UserMgr0\AppData\Local\Packages\27878ConstantineTarasenko.458004FD2C47C_c8b3w9r5va522\LocalState\`)
