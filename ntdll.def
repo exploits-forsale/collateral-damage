@@ -1,0 +1,8 @@
+EXPORTS
+NtCreateFile
+NtCreateIoCompletion
+NtDeviceIoControlFile
+NtQueryInformationToken
+NtQuerySystemInformation
+NtQuerySystemInformationEx
+NtSetIoCompletion
