@@ -2,7 +2,7 @@
 Collateral Damage is a kernel exploit for Xbox SystemOS using [CVE-2024-30088](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-30088).
 It targets Xbox One and Xbox Series consoles running kernel versions 25398.4478, 25398.4908, and 25398.4909. The initial entrypoint is via the Game Script UWP application.
 
-This exploit was developed by [Emma Kirkpatrick](https://x.com/carrot_c4k3) (vulnerability discovery & exploitation) and [Lander Brandt](https://x.com/landaire) (PE loader development)
+This exploit was developed by [Emma Kirkpatrick](https://x.com/carrot_c4k3) (vulnerability discovery & exploitation) and [Lander Brandt](https://x.com/landaire) ([PE loader](https://github.com/exploits-forsale/solstice) development)
 
 ## Important Caveats
 This initial release is largely intended for developers. Currently a way to place files into the `LocalState` directory of Game Script is required via an app such as [Adv File Explorer (FullTrust)](https://apps.microsoft.com/detail/9nbnjpsxfsqb). 
@@ -33,3 +33,23 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 
 S:\>
 ```
+
+## Experimentation
+Lots of additional work is needed to bring this to the point of being a user-friendly tool for loading homebrew onto the Xbox, but I hope that this provides a good starting point :) If you would like to play around with running code as SYSTEM you can put your code in the `post_exploit` function in `post_exploit.c`.
+
+## Further Work
+There is lots more to do on this, but as the kernel part is done I wanted to share it with the community so developers could start poking around with SYSTEM privileges. Here are a few things that I am still hoping to add in the future:
+- Side loading support
+- Unsigned non-UWP process launching
+- SSH support
+
+Additional ideas are welcome :)
+
+## Thanks
+thank you to everyone who helped me brainstorm and shared their knowledge and time with me throughout this!!! some of those who i would like to show appreciation to:
+
+- chompie
+- tuxuser
+- baw
+- [Xbox One Research](https://xboxoneresearch.github.io/)
+- XBOX-SCENE Discord
