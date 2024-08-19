@@ -1,0 +1,50 @@
+name: MSBuild
+
+on:
+  push:
+  pull_request:
+
+env:
+  SOLUTION_FILE_PATH: collat_payload.sln
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Platform=x64 /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Copy files
+      run: |
+        mkdir release\
+        cp README.md release\
+        cp LICENSE release\
+        cp x64\Release\collat_payload.exe release\
+        cp solstice_artifacts\* release\ 
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: collateral_damage_artifacts
+        path: |
+          release\**
+
+    - name: Bundle binaries
+      run: 7z a -tzip collateral_damage.zip release\**
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: collateral_damage.zip
