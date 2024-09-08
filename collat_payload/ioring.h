@@ -78,7 +78,7 @@ typedef struct _HIORING
 
 int ioring_setup(PIORING_OBJECT* ppIoRingAddr);
 void kwrite(UINT64 addr, PVOID data, SIZE_T size);
-int ioring_lpe2(ULONG pid, ULONG64 ullFakeRegBufferAddr, DWORD dwFakeRegBufferCnt, UINT64 ioring_addr);
+int ioring_lpe2(ULONG pid, ULONG64 ullFakeRegBufferAddr, DWORD dwFakeRegBufferCnt, UINT64 ioring_addr, UINT64 nt_base);
 int map_region();
 int race_succeeded(ULONG ulFakeRegBufferCnt, UINT64 ioring_addr);
 
