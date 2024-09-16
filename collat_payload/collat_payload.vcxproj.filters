@@ -27,6 +27,9 @@
     <ClCompile Include="nt_offsets.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="winrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="win_defs.h">
@@ -39,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="post_exploit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.Xbox.UI.Internal.ToastNotifications.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,6 +9,7 @@
 
 #include "ioring.h"
 #include "nt_offsets.h"
+#include "winrt.h"
 
 // socket stuff
 WSADATA wsaData;
@@ -495,6 +496,16 @@ int main(int argc, char** argv)
         return 0;
     }
 
+    /*
+     * Critical part of the exploit has succeeded.
+     * At this point we are still "Low IL" and can call the WinRT Notification / Toast API.
+     * After ioring_lpe2 has executed, the PackageIdentitiy is lost and the WinRT API would fail.
+     */
+    cur_msg = "Showing toast!\n";
+    send(winSock, cur_msg, strlen(cur_msg), 0);
+    //show_toast();
+    show_toast_rare_achievement(L"Collateral Damage", L"achieved", L"Enjoy!", NULL);
+
     // Setup the IO ring
     ioring_addr = 0;
     int res = ioring_setup(&ioring_addr);
@@ -514,7 +525,6 @@ int main(int argc, char** argv)
 
     // Run our post-exploitation code
     post_exploit(winSock);
-    
 
 	return 0;
 }

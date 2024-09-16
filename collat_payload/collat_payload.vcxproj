@@ -23,12 +23,15 @@
     <ClCompile Include="ioring_lpe.c" />
     <ClCompile Include="nt_offsets.c" />
     <ClCompile Include="post_exploit.c" />
+    <ClCompile Include="winrt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ioring.h" />
     <ClInclude Include="nt_offsets.h" />
     <ClInclude Include="post_exploit.h" />
+    <ClInclude Include="Windows.Xbox.UI.Internal.ToastNotifications.h" />
     <ClInclude Include="win_defs.h" />
+    <ClInclude Include="winrt.h" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="prefetch_asm.asm" />
