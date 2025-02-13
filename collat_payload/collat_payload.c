@@ -451,6 +451,11 @@ int main(int argc, char** argv)
             build_rev = 4908;
         }
     }
+    else if (build_version.NtBuildNumber == 22621 && build_version.NtBuildQfe == 2864)
+    {
+        // 10.0.22621.2864
+        build_rev = 2864;
+    }
 
     if (build_rev == 0)
     {
