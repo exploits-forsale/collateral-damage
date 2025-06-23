@@ -46,6 +46,7 @@ jobs:
 
     - name: Update nightly
       uses: softprops/action-gh-release@v2
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         files: collateral_damage.zip
         prerelease: true
