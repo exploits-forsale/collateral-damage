@@ -3,6 +3,7 @@ name: MSBuild
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 env:
   SOLUTION_FILE_PATH: collat_payload.sln
@@ -42,6 +43,13 @@ jobs:
 
     - name: Bundle binaries
       run: 7z a -tzip collateral_damage.zip release\**
+
+    - name: Update nightly
+      uses: softprops/action-gh-release@v2
+      with:
+        files: collateral_damage.zip
+        prerelease: true
+        tag_name: nightly
 
     - name: Release
       uses: softprops/action-gh-release@v2
